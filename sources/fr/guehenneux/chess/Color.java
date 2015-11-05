@@ -1,4 +1,4 @@
-package fr.guehenneux.chess.piece;
+package fr.guehenneux.chess;
 
 /**
  * @author Jonathan Guéhenneux

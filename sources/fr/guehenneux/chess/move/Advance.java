@@ -41,9 +41,6 @@ public class Advance extends AbstractMove {
 		chess.setPiece(savedX, savedY, null);
 		chess.setPiece(x, y, piece);
 
-		piece.setX(x);
-		piece.setY(y);
-
 		chess.nextPlayer();
 	}
 
@@ -52,9 +49,6 @@ public class Advance extends AbstractMove {
 
 		chess.setPiece(x, y, null);
 		chess.setPiece(savedX, savedY, piece);
-
-		piece.setX(savedX);
-		piece.setY(savedY);
 
 		chess.previousPlayer();
 	}

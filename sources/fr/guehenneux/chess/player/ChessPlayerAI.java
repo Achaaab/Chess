@@ -4,7 +4,7 @@ import fr.guehenneux.alphabeta.DecisionAlgorithm;
 import fr.guehenneux.alphabeta.Move;
 import fr.guehenneux.alphabeta.PrincipalVariationSearch;
 import fr.guehenneux.chess.Chess;
-import fr.guehenneux.chess.piece.Color;
+import fr.guehenneux.chess.Color;
 
 /**
  * @author Jonathan Guéhenneux
@@ -21,7 +21,7 @@ public class ChessPlayerAI extends ChessPlayer {
 
 		super(chess, color);
 
-		decisionAlgorithm = new PrincipalVariationSearch(chess, 2);
+		decisionAlgorithm = new PrincipalVariationSearch(chess, 4);
 	}
 
 	@Override

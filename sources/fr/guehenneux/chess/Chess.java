@@ -2,8 +2,8 @@ package fr.guehenneux.chess;
 
 import fr.guehenneux.alphabeta.Player;
 import fr.guehenneux.alphabeta.TwoPlayersZeroSumGame;
-import fr.guehenneux.chess.piece.Color;
 import fr.guehenneux.chess.piece.Piece;
+import fr.guehenneux.chess.player.ChessPlayer;
 import fr.guehenneux.chess.player.ChessPlayerAI;
 
 /**
@@ -12,6 +12,10 @@ import fr.guehenneux.chess.player.ChessPlayerAI;
 public class Chess extends TwoPlayersZeroSumGame {
 
 	private Piece[][] board;
+
+	private ChessPlayer white;
+	private ChessPlayer black;
+
 	private ChessUI ui;
 
 	/**
@@ -21,10 +25,10 @@ public class Chess extends TwoPlayersZeroSumGame {
 
 		board = new Piece[8][8];
 
-		player0 = new ChessPlayerAI(this, Color.WHITE);
-		player1 = new ChessPlayerAI(this, Color.BLACK);
+		player0 = white = new ChessPlayerAI(this, Color.WHITE);
+		player1 = black = new ChessPlayerAI(this, Color.BLACK);
 
-		currentPlayer = player0;
+		currentPlayer = white;
 	}
 
 	/**
@@ -42,7 +46,12 @@ public class Chess extends TwoPlayersZeroSumGame {
 	 * @param piece
 	 */
 	public void setPiece(int x, int y, Piece piece) {
+
 		board[x][y] = piece;
+
+		if (piece != null) {
+			piece.setPosition(x, y);
+		}
 	}
 
 	/**
@@ -54,25 +63,41 @@ public class Chess extends TwoPlayersZeroSumGame {
 
 	@Override
 	public double getHeuristicValue(Player player) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		double heuristicValue;
+
+		if (player == white) {
+			heuristicValue = white.getValue() - black.getValue();
+		} else {
+			heuristicValue = black.getValue() - white.getValue();
+		}
+
+		return heuristicValue;
 	}
 
 	@Override
 	public double getWinningMoveValue() {
-		// TODO Auto-generated method stub
-		return 1000;
+		return 2000;
 	}
 
 	@Override
 	public Player getWinner() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Player winner;
+
+		if (!white.isKingAlive()) {
+			winner = black;
+		} else if (!black.isKingAlive()) {
+			winner = white;
+		} else {
+			winner = null;
+		}
+
+		return winner;
 	}
 
 	@Override
 	public boolean isDraw() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

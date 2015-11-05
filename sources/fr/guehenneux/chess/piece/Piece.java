@@ -4,11 +4,15 @@ import java.util.List;
 
 import fr.guehenneux.alphabeta.Move;
 import fr.guehenneux.chess.Chess;
+import fr.guehenneux.chess.Color;
+import fr.guehenneux.chess.player.ChessPlayer;
 
 /**
  * @author Jonathan Guéhenneux
  */
 public interface Piece {
+
+	// Below are unicode characters for chess pieces, they are quite usefull for a cheap user interface.
 
 	char WHITE_KING = '\u2654';
 	char WHITE_QUEEN = '\u2655';
@@ -24,10 +28,24 @@ public interface Piece {
 	char BLACK_KNIGHT = '\u265E';
 	char BLACK_PAWN = '\u265F';
 
+	// Below are the piece values.
+
+	double KING_VALUE = 0;
+	double QUEEN_VALUE = 9;
+	double ROOK_VALUE = 5;
+	double BISHOP_VALUE = 3;
+	double KNIGHT_VALUE = 3;
+	double PAWN_VALUE = 1;
+
 	/**
 	 * @return
 	 */
 	Chess getChess();
+
+	/**
+	 * @return
+	 */
+	ChessPlayer getPlayer();
 
 	/**
 	 * @return
@@ -37,12 +55,12 @@ public interface Piece {
 	/**
 	 * @return
 	 */
-	int getX();
+	double getValue();
 
 	/**
-	 * @param x
+	 * @return
 	 */
-	void setX(int x);
+	int getX();
 
 	/**
 	 * @return
@@ -50,9 +68,10 @@ public interface Piece {
 	int getY();
 
 	/**
+	 * @param x
 	 * @param y
 	 */
-	void setY(int y);
+	void setPosition(int x, int y);
 
 	/**
 	 * @return
