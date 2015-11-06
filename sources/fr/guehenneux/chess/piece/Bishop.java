@@ -26,6 +26,15 @@ public class Bishop extends AbstractPiece {
 		super(chess, player, color, BISHOP_VALUE, x, y, color == Color.WHITE ? WHITE_BISHOP : BLACK_BISHOP);
 	}
 
+	/**
+	 * @param chess
+	 * @param player
+	 * @param color
+	 */
+	public Bishop(Chess chess, ChessPlayer player, Color color) {
+		super(chess, player, color, BISHOP_VALUE, color == Color.WHITE ? WHITE_BISHOP : BLACK_BISHOP);
+	}
+
 	@Override
 	public List<Move> getMoves() {
 

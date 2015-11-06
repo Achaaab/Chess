@@ -28,15 +28,25 @@ public abstract class AbstractPiece implements Piece {
 	 */
 	public AbstractPiece(Chess chess, ChessPlayer player, Color color, double value, int x, int y, char unicodeCharacter) {
 
+		this(chess, player, color, value, unicodeCharacter);
+
+		chess.setPiece(x, y, this);
+	}
+
+	/**
+	 * @param chess
+	 * @param player
+	 * @param color
+	 * @param value
+	 * @param unicodeCharacter
+	 */
+	public AbstractPiece(Chess chess, ChessPlayer player, Color color, double value, char unicodeCharacter) {
+
 		this.chess = chess;
 		this.player = player;
 		this.color = color;
 		this.value = value;
-		this.x = x;
-		this.y = y;
 		this.unicodeCharacter = unicodeCharacter;
-
-		chess.setPiece(x, y, this);
 	}
 
 	@Override

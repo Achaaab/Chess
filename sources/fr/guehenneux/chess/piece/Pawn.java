@@ -8,12 +8,18 @@ import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.move.Advance;
 import fr.guehenneux.chess.move.Capture;
+import fr.guehenneux.chess.move.Promotion;
 import fr.guehenneux.chess.player.ChessPlayer;
 
 /**
  * @author Jonathan Guéhenneux
  */
 public class Pawn extends AbstractPiece {
+
+	private Queen promotionQueen;
+	private Rook promotionRook;
+	private Bishop promotionBishop;
+	private Knigth promotionKnight;
 
 	/**
 	 * @param chess
@@ -23,7 +29,13 @@ public class Pawn extends AbstractPiece {
 	 * @param y
 	 */
 	public Pawn(Chess chess, ChessPlayer player, Color color, int x, int y) {
+
 		super(chess, player, color, PAWN_VALUE, x, y, color == Color.WHITE ? WHITE_PAWN : BLACK_PAWN);
+
+		promotionQueen = new Queen(chess, player, color);
+		promotionRook = new Rook(chess, player, color);
+		promotionBishop = new Bishop(chess, player, color);
+		promotionKnight = new Knigth(chess, player, color);
 	}
 
 	@Override
@@ -64,6 +76,18 @@ public class Pawn extends AbstractPiece {
 						moves.add(new Capture(this, piece));
 					}
 				}
+
+			} else {
+
+				piece = chess.getPiece(x, 7);
+
+				if (piece == null) {
+
+					moves.add(new Promotion(this, promotionQueen));
+					moves.add(new Promotion(this, promotionRook));
+					moves.add(new Promotion(this, promotionBishop));
+					moves.add(new Promotion(this, promotionKnight));
+				}
 			}
 
 			break;
@@ -96,6 +120,17 @@ public class Pawn extends AbstractPiece {
 					if (piece != null && piece.getColor() != color) {
 						moves.add(new Capture(this, piece));
 					}
+				}
+			} else {
+
+				piece = chess.getPiece(x, 0);
+
+				if (piece == null) {
+
+					moves.add(new Promotion(this, promotionQueen));
+					moves.add(new Promotion(this, promotionRook));
+					moves.add(new Promotion(this, promotionBishop));
+					moves.add(new Promotion(this, promotionKnight));
 				}
 			}
 

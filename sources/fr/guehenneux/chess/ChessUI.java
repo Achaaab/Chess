@@ -18,8 +18,6 @@ import fr.guehenneux.chess.piece.Piece;
  */
 public class ChessUI extends GridPane {
 
-	private static final Font FONT = new Font("Arial Unicode MS", 60);
-	
 	private static final Paint DARK_SQUARE_COLOR = Color.web("0xD18B47");
 	private static final Paint WHITE_SQUARE_COLOR = Color.web("0xFFCE9E");
 
@@ -35,14 +33,17 @@ public class ChessUI extends GridPane {
 
 	/**
 	 * @param model
+	 * @param squareSize
 	 */
-	public ChessUI(Chess model) {
+	public ChessUI(Chess model, double squareSize) {
 
 		this.model = model;
 
 		squares = new Label[8][8];
 
 		Label square;
+
+		Font font = new Font("Arial Unicode MS", squareSize * 0.75);
 
 		for (int x = 0; x < 8; x++) {
 
@@ -56,9 +57,9 @@ public class ChessUI extends GridPane {
 					square.setBackground(WHITE_SQUARE_BACKGROUND);
 				}
 
-				square.setFont(FONT);
+				square.setFont(font);
 				square.setAlignment(Pos.CENTER);
-				square.setPrefSize(80, 80);
+				square.setPrefSize(squareSize, squareSize);
 
 				squares[x][y] = square;
 				add(square, x, 7 - y);

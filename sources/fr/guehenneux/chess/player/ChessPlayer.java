@@ -9,8 +9,10 @@ import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.piece.Bishop;
 import fr.guehenneux.chess.piece.King;
+import fr.guehenneux.chess.piece.Knigth;
 import fr.guehenneux.chess.piece.Pawn;
 import fr.guehenneux.chess.piece.Piece;
+import fr.guehenneux.chess.piece.Queen;
 import fr.guehenneux.chess.piece.Rook;
 
 /**
@@ -47,9 +49,12 @@ public abstract class ChessPlayer implements Player {
 			addPiece(new Pawn(chess, this, color, 7, 1));
 			addPiece(new Rook(chess, this, color, 0, 0));
 			addPiece(new Rook(chess, this, color, 7, 0));
+			addPiece(new Knigth(chess, this, color, 1, 0));
+			addPiece(new Knigth(chess, this, color, 6, 0));
 			addPiece(new Bishop(chess, this, color, 2, 0));
 			addPiece(new Bishop(chess, this, color, 5, 0));
 			addPiece(new King(chess, this, color, 4, 0));
+			addPiece(new Queen(chess, this, color, 3, 0));
 			break;
 
 		case BLACK:
@@ -64,11 +69,21 @@ public abstract class ChessPlayer implements Player {
 			addPiece(new Pawn(chess, this, color, 7, 6));
 			addPiece(new Rook(chess, this, color, 0, 7));
 			addPiece(new Rook(chess, this, color, 7, 7));
+			addPiece(new Knigth(chess, this, color, 1, 7));
+			addPiece(new Knigth(chess, this, color, 6, 7));
 			addPiece(new Bishop(chess, this, color, 2, 7));
 			addPiece(new Bishop(chess, this, color, 5, 7));
 			addPiece(new King(chess, this, color, 4, 7));
+			addPiece(new Queen(chess, this, color, 3, 7));
 			break;
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	public Color getColor() {
+		return color;
 	}
 
 	/**

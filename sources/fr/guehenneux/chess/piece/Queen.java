@@ -13,7 +13,7 @@ import fr.guehenneux.chess.player.ChessPlayer;
 /**
  * @author Jonathan Guéhenneux
  */
-public class Rook extends AbstractPiece {
+public class Queen extends AbstractPiece {
 
 	/**
 	 * @param chess
@@ -22,8 +22,8 @@ public class Rook extends AbstractPiece {
 	 * @param x
 	 * @param y
 	 */
-	public Rook(Chess chess, ChessPlayer player, Color color, int x, int y) {
-		super(chess, player, color, ROOK_VALUE, x, y, color == Color.WHITE ? WHITE_ROOK : BLACK_ROOK);
+	public Queen(Chess chess, ChessPlayer player, Color color, int x, int y) {
+		super(chess, player, color, QUEEN_VALUE, x, y, color == Color.WHITE ? WHITE_QUEEN : BLACK_QUEEN);
 	}
 
 	/**
@@ -31,8 +31,8 @@ public class Rook extends AbstractPiece {
 	 * @param player
 	 * @param color
 	 */
-	public Rook(Chess chess, ChessPlayer player, Color color) {
-		super(chess, player, color, ROOK_VALUE, color == Color.WHITE ? WHITE_ROOK : BLACK_ROOK);
+	public Queen(Chess chess, ChessPlayer player, Color color) {
+		super(chess, player, color, QUEEN_VALUE, color == Color.WHITE ? WHITE_QUEEN : BLACK_QUEEN);
 	}
 
 	@Override
@@ -118,6 +118,90 @@ public class Rook extends AbstractPiece {
 
 				moves.add(new Advance(this, newX, newY));
 				newY--;
+
+			} else if (piece.getColor() != color) {
+
+				moves.add(new Capture(this, piece));
+			}
+		}
+
+		newX = x + 1;
+		newY = y + 1;
+		emptySquare = true;
+
+		while (newX < 8 && newY < 8 && emptySquare) {
+
+			piece = chess.getPiece(newX, newY);
+			emptySquare = piece == null;
+
+			if (emptySquare) {
+
+				moves.add(new Advance(this, newX, newY));
+				newX++;
+				newY++;
+
+			} else if (piece.getColor() != color) {
+
+				moves.add(new Capture(this, piece));
+			}
+		}
+
+		newX = x - 1;
+		newY = y - 1;
+		emptySquare = true;
+
+		while (newX > -1 && newY > -1 && emptySquare) {
+
+			piece = chess.getPiece(newX, newY);
+			emptySquare = piece == null;
+
+			if (emptySquare) {
+
+				moves.add(new Advance(this, newX, newY));
+				newX--;
+				newY--;
+
+			} else if (piece.getColor() != color) {
+
+				moves.add(new Capture(this, piece));
+			}
+		}
+
+		newX = x + 1;
+		newY = y - 1;
+		emptySquare = true;
+
+		while (newX < 8 && newY > -1 && emptySquare) {
+
+			piece = chess.getPiece(newX, newY);
+			emptySquare = piece == null;
+
+			if (emptySquare) {
+
+				moves.add(new Advance(this, newX, newY));
+				newX++;
+				newY--;
+
+			} else if (piece.getColor() != color) {
+
+				moves.add(new Capture(this, piece));
+			}
+		}
+
+		newX = x - 1;
+		newY = y + 1;
+		emptySquare = true;
+
+		while (newX > -1 && newY < 8 && emptySquare) {
+
+			piece = chess.getPiece(newX, newY);
+			emptySquare = piece == null;
+
+			if (emptySquare) {
+
+				moves.add(new Advance(this, newX, newY));
+				newX--;
+				newY++;
 
 			} else if (piece.getColor() != color) {
 

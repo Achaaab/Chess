@@ -1,8 +1,8 @@
 package fr.guehenneux.chess.player;
 
 import fr.guehenneux.alphabeta.DecisionAlgorithm;
+import fr.guehenneux.alphabeta.MiniMax;
 import fr.guehenneux.alphabeta.Move;
-import fr.guehenneux.alphabeta.PrincipalVariationSearch;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 
@@ -21,7 +21,7 @@ public class ChessPlayerAI extends ChessPlayer {
 
 		super(chess, color);
 
-		decisionAlgorithm = new PrincipalVariationSearch(chess, 4);
+		decisionAlgorithm = new MiniMax(chess, 5, false);
 	}
 
 	@Override
