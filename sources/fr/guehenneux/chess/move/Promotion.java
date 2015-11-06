@@ -50,8 +50,8 @@ public class Promotion extends AbstractMove {
 			break;
 		}
 
-		player.removePiece(replacementPiece);
-		player.addPiece(pawn);
+		player.removePiece(pawn);
+		player.addPiece(replacementPiece);
 
 		chess.nextPlayer();
 	}

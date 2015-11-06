@@ -30,7 +30,7 @@ public interface Piece {
 
 	// Below are the piece values.
 
-	double KING_VALUE = 0;
+	double KING_VALUE = 1000;
 	double QUEEN_VALUE = 9;
 	double ROOK_VALUE = 5;
 	double BISHOP_VALUE = 3;
