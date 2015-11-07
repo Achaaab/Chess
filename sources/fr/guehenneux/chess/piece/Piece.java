@@ -74,6 +74,21 @@ public interface Piece {
 	void setPosition(int x, int y);
 
 	/**
+	 * @return the number of times the piece has been moved
+	 */
+	int getMoveCount();
+
+	/**
+	 * increment the number of times the piece has been moved
+	 */
+	void incrementMoveCount();
+
+	/**
+	 * decrement the number of times the piece has been moved
+	 */
+	void decrementMoveCount();
+
+	/**
 	 * @return
 	 */
 	List<Move> getMoves();

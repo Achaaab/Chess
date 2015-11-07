@@ -52,6 +52,7 @@ public class Promotion extends AbstractMove {
 
 		player.removePiece(pawn);
 		player.addPiece(replacementPiece);
+		pawn.incrementMoveCount();
 
 		chess.nextPlayer();
 	}
@@ -74,6 +75,7 @@ public class Promotion extends AbstractMove {
 
 		player.removePiece(replacementPiece);
 		player.addPiece(pawn);
+		pawn.decrementMoveCount();
 
 		chess.previousPlayer();
 	}

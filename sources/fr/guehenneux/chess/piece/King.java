@@ -8,6 +8,7 @@ import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.move.Advance;
 import fr.guehenneux.chess.move.Capture;
+import fr.guehenneux.chess.move.Castling;
 import fr.guehenneux.chess.player.ChessPlayer;
 
 /**
@@ -121,6 +122,35 @@ public class King extends AbstractPiece {
 				moves.add(new Advance(this, x, y + 1));
 			} else if (piece.getColor() != color) {
 				moves.add(new Capture(this, piece));
+			}
+		}
+
+		// castlings
+
+		if (moveCount == 0) {
+
+			Rook rook;
+
+			if (chess.getPiece(5, y) == null && chess.getPiece(6, y) == null) {
+
+				piece = chess.getPiece(7, y);
+
+				if (piece != null && piece.getMoveCount() == 0 && piece.getColor() == color && piece instanceof Rook) {
+
+					rook = (Rook) piece;
+					moves.add(new Castling(this, rook));
+				}
+			}
+
+			if (chess.getPiece(3, y) == null && chess.getPiece(2, y) == null && chess.getPiece(1, y) == null) {
+
+				piece = chess.getPiece(0, y);
+
+				if (piece != null && piece.getMoveCount() == 0 && piece.getColor() == color && piece instanceof Rook) {
+
+					rook = (Rook) piece;
+					moves.add(new Castling(this, rook));
+				}
 			}
 		}
 

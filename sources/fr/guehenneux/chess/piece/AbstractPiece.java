@@ -16,6 +16,7 @@ public abstract class AbstractPiece implements Piece {
 	protected int x;
 	protected int y;
 	protected char unicodeCharacter;
+	protected int moveCount;
 
 	/**
 	 * @param chess
@@ -47,6 +48,8 @@ public abstract class AbstractPiece implements Piece {
 		this.color = color;
 		this.value = value;
 		this.unicodeCharacter = unicodeCharacter;
+
+		moveCount = 0;
 	}
 
 	@Override
@@ -84,6 +87,21 @@ public abstract class AbstractPiece implements Piece {
 
 		this.x = x;
 		this.y = y;
+	}
+
+	@Override
+	public int getMoveCount() {
+		return moveCount;
+	}
+
+	@Override
+	public void incrementMoveCount() {
+		moveCount++;
+	}
+
+	@Override
+	public void decrementMoveCount() {
+		moveCount--;
 	}
 
 	@Override

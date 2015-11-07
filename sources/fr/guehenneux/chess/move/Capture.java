@@ -47,6 +47,7 @@ public class Capture extends AbstractMove {
 
 		chess.setPiece(savedX, savedY, null);
 		chess.setPiece(x, y, capturingPiece);
+		capturingPiece.incrementMoveCount();
 
 		capturedPlayer.removePiece(capturedPiece);
 
@@ -61,6 +62,7 @@ public class Capture extends AbstractMove {
 
 		chess.setPiece(savedX, savedY, capturingPiece);
 		chess.setPiece(x, y, capturedPiece);
+		capturingPiece.decrementMoveCount();
 
 		capturedPlayer.addPiece(capturedPiece);
 
