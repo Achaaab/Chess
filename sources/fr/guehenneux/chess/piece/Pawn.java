@@ -8,6 +8,7 @@ import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.move.Advance;
 import fr.guehenneux.chess.move.Capture;
+import fr.guehenneux.chess.move.CapturePromotion;
 import fr.guehenneux.chess.move.Promotion;
 import fr.guehenneux.chess.player.ChessPlayer;
 
@@ -88,6 +89,32 @@ public class Pawn extends AbstractPiece {
 					moves.add(new Promotion(this, promotionBishop));
 					moves.add(new Promotion(this, promotionKnight));
 				}
+
+				if (x > 0) {
+
+					piece = chess.getPiece(x - 1, 7);
+
+					if (piece != null && piece.getColor() != color) {
+
+						moves.add(new CapturePromotion(this, piece, promotionQueen));
+						moves.add(new CapturePromotion(this, piece, promotionRook));
+						moves.add(new CapturePromotion(this, piece, promotionBishop));
+						moves.add(new CapturePromotion(this, piece, promotionKnight));
+					}
+				}
+
+				if (x < 7) {
+
+					piece = chess.getPiece(x + 1, 7);
+
+					if (piece != null && piece.getColor() != color) {
+
+						moves.add(new CapturePromotion(this, piece, promotionQueen));
+						moves.add(new CapturePromotion(this, piece, promotionRook));
+						moves.add(new CapturePromotion(this, piece, promotionBishop));
+						moves.add(new CapturePromotion(this, piece, promotionKnight));
+					}
+				}
 			}
 
 			break;
@@ -131,6 +158,32 @@ public class Pawn extends AbstractPiece {
 					moves.add(new Promotion(this, promotionRook));
 					moves.add(new Promotion(this, promotionBishop));
 					moves.add(new Promotion(this, promotionKnight));
+				}
+
+				if (x > 0) {
+
+					piece = chess.getPiece(x - 1, 0);
+
+					if (piece != null && piece.getColor() != color) {
+
+						moves.add(new CapturePromotion(this, piece, promotionQueen));
+						moves.add(new CapturePromotion(this, piece, promotionRook));
+						moves.add(new CapturePromotion(this, piece, promotionBishop));
+						moves.add(new CapturePromotion(this, piece, promotionKnight));
+					}
+				}
+
+				if (x < 7) {
+
+					piece = chess.getPiece(x + 1, 0);
+
+					if (piece != null && piece.getColor() != color) {
+
+						moves.add(new CapturePromotion(this, piece, promotionQueen));
+						moves.add(new CapturePromotion(this, piece, promotionRook));
+						moves.add(new CapturePromotion(this, piece, promotionBishop));
+						moves.add(new CapturePromotion(this, piece, promotionKnight));
+					}
 				}
 			}
 
