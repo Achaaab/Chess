@@ -11,7 +11,6 @@ import fr.guehenneux.chess.player.ChessPlayer;
  */
 public class CapturePromotion extends ChessMove {
 
-	private Chess chess;
 	private ChessPlayer capturingPlayer;
 	private ChessPlayer capturedPlayer;
 	private Color color;

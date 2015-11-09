@@ -32,7 +32,7 @@ public class MoveCell extends TableCell<MovePair, String> {
 		super.updateItem(move, empty);
 
 		if (empty || move == null) {
-			setGraphic(null);
+			setText("");
 		} else {
 			setText(move.toString());
 		}

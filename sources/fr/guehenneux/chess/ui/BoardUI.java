@@ -1,6 +1,5 @@
 package fr.guehenneux.chess.ui;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -21,6 +20,9 @@ public class BoardUI extends GridPane {
 
 	private static final double SQUARE_SIZE_INCHES = 1.0;
 	private static final String SQUARE_FONT_NAME = "Arial Unicode MS";
+	private static final double SQUARE_FONT_SIZE_RATIO = 0.75;
+	private static final String LABEL_FONT_NAME = "Arial Unicode MS";
+	private static final double LABEL_FONT_SIZE_RATIO = 0.4;
 
 	private static final Paint DARK_SQUARE_COLOR = Color.web("0xD18B47");
 	private static final Paint WHITE_SQUARE_COLOR = Color.web("0xFFCE9E");
@@ -49,7 +51,46 @@ public class BoardUI extends GridPane {
 
 		double squareSize = SQUARE_SIZE_INCHES * dpi;
 
-		Font font = new Font(SQUARE_FONT_NAME, squareSize * 0.75);
+		Font squareFont = new Font(SQUARE_FONT_NAME, squareSize * SQUARE_FONT_SIZE_RATIO);
+		Font labelFont = new Font(LABEL_FONT_NAME, squareSize * LABEL_FONT_SIZE_RATIO);
+
+		Label fileLabel;
+
+		for (int file = 0; file < 8; file++) {
+
+			fileLabel = new Label(Character.toString((char) ('a' + file)));
+			fileLabel.setFont(labelFont);
+			fileLabel.setAlignment(Pos.BOTTOM_CENTER);
+			fileLabel.setPrefSize(squareSize, squareSize);
+
+			add(fileLabel, file + 1, 0);
+
+			fileLabel = new Label(Character.toString((char) ('a' + file)));
+			fileLabel.setFont(labelFont);
+			fileLabel.setAlignment(Pos.TOP_CENTER);
+			fileLabel.setPrefSize(squareSize, squareSize);
+
+			add(fileLabel, file + 1, 9);
+		}
+
+		Label rankLabel;
+
+		for (int rank = 0; rank < 8; rank++) {
+
+			rankLabel = new Label(Character.toString((char) ('1' + rank)));
+			rankLabel.setFont(labelFont);
+			rankLabel.setAlignment(Pos.CENTER);
+			rankLabel.setPrefSize(squareSize, squareSize);
+
+			add(rankLabel, 0, 8 - rank);
+
+			rankLabel = new Label(Character.toString((char) ('1' + rank)));
+			rankLabel.setFont(labelFont);
+			rankLabel.setAlignment(Pos.CENTER);
+			rankLabel.setPrefSize(squareSize, squareSize);
+
+			add(rankLabel, 9, 8 - rank);
+		}
 
 		for (int x = 0; x < 8; x++) {
 
@@ -63,12 +104,12 @@ public class BoardUI extends GridPane {
 					square.setBackground(WHITE_SQUARE_BACKGROUND);
 				}
 
-				square.setFont(font);
+				square.setFont(squareFont);
 				square.setAlignment(Pos.CENTER);
 				square.setPrefSize(squareSize, squareSize);
 
 				squares[x][y] = square;
-				add(square, x, 7 - y);
+				add(square, x + 1, 8 - y);
 			}
 		}
 	}
@@ -77,13 +118,6 @@ public class BoardUI extends GridPane {
 	 * 
 	 */
 	public void update() {
-		Platform.runLater(() -> updatePlatform());
-	}
-
-	/**
-	 * 
-	 */
-	private void updatePlatform() {
 
 		Label square;
 		Piece piece;
