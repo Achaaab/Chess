@@ -1,6 +1,5 @@
 package fr.guehenneux.chess.move;
 
-import fr.guehenneux.alphabeta.AbstractMove;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.piece.Pawn;
@@ -10,7 +9,7 @@ import fr.guehenneux.chess.player.ChessPlayer;
 /**
  * @author Jonathan Guéhenneux
  */
-public class CapturePromotion extends AbstractMove {
+public class CapturePromotion extends ChessMove {
 
 	private Chess chess;
 	private ChessPlayer capturingPlayer;
@@ -32,7 +31,6 @@ public class CapturePromotion extends AbstractMove {
 
 		super(chess);
 
-		this.chess = chess;
 		this.pawn = pawn;
 		this.replacementPiece = replacementPiece;
 		this.capturedPiece = capturedPiece;

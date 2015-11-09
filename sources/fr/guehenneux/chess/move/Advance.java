@@ -1,15 +1,13 @@
 package fr.guehenneux.chess.move;
 
-import fr.guehenneux.alphabeta.AbstractMove;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.piece.Piece;
 
 /**
  * @author Jonathan Guéhenneux
  */
-public class Advance extends AbstractMove {
+public class Advance extends ChessMove {
 
-	private Chess chess;
 	private Piece piece;
 
 	private int savedX;
@@ -28,7 +26,6 @@ public class Advance extends AbstractMove {
 
 		super(chess);
 
-		this.chess = chess;
 		this.piece = piece;
 		this.x = x;
 		this.y = y;
@@ -55,5 +52,10 @@ public class Advance extends AbstractMove {
 		piece.decrementMoveCount();
 
 		super.cancel();
+	}
+
+	@Override
+	public String toString() {
+		return piece + getSquareString(savedX, savedY) + '-' + getSquareString(x, y);
 	}
 }

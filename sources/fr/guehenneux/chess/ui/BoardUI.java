@@ -1,4 +1,4 @@
-package fr.guehenneux.chess;
+package fr.guehenneux.chess.ui;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -11,12 +11,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.piece.Piece;
 
 /**
  * @author Jonathan Guéhenneux
  */
-public class ChessUI extends GridPane {
+public class BoardUI extends GridPane {
+
+	private static final double SQUARE_SIZE_INCHES = 1.0;
+	private static final String SQUARE_FONT_NAME = "Arial Unicode MS";
 
 	private static final Paint DARK_SQUARE_COLOR = Color.web("0xD18B47");
 	private static final Paint WHITE_SQUARE_COLOR = Color.web("0xFFCE9E");
@@ -33,9 +37,9 @@ public class ChessUI extends GridPane {
 
 	/**
 	 * @param model
-	 * @param squareSize
+	 * @param dpi
 	 */
-	public ChessUI(Chess model, double squareSize) {
+	public BoardUI(Chess model, double dpi) {
 
 		this.model = model;
 
@@ -43,7 +47,9 @@ public class ChessUI extends GridPane {
 
 		Label square;
 
-		Font font = new Font("Arial Unicode MS", squareSize * 0.75);
+		double squareSize = SQUARE_SIZE_INCHES * dpi;
+
+		Font font = new Font(SQUARE_FONT_NAME, squareSize * 0.75);
 
 		for (int x = 0; x < 8; x++) {
 

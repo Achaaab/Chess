@@ -1,10 +1,10 @@
 package fr.guehenneux.chess;
 
+import fr.guehenneux.chess.ui.ChessUI;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -25,11 +25,8 @@ public class Test extends Application {
 
 		try {
 
-			Screen screen = Screen.getPrimary();
-			double dpi = screen.getDpi();
-
 			Chess model = new Chess();
-			ChessUI ui = new ChessUI(model, dpi);
+			ChessUI ui = new ChessUI(model);
 
 			model.setUI(ui);
 

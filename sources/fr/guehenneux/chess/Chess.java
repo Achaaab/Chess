@@ -1,7 +1,12 @@
 package fr.guehenneux.chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.guehenneux.alphabeta.Move;
 import fr.guehenneux.alphabeta.Player;
 import fr.guehenneux.alphabeta.TwoPlayersZeroSumGame;
+import fr.guehenneux.chess.move.MovePair;
 import fr.guehenneux.chess.piece.Bishop;
 import fr.guehenneux.chess.piece.King;
 import fr.guehenneux.chess.piece.Knigth;
@@ -11,6 +16,7 @@ import fr.guehenneux.chess.piece.Queen;
 import fr.guehenneux.chess.piece.Rook;
 import fr.guehenneux.chess.player.ChessPlayer;
 import fr.guehenneux.chess.player.ChessPlayerAI;
+import fr.guehenneux.chess.ui.ChessUI;
 
 /**
  * @author Jonathan Guéhenneux
@@ -65,6 +71,41 @@ public class Chess extends TwoPlayersZeroSumGame {
 	 */
 	public void setUI(ChessUI ui) {
 		this.ui = ui;
+	}
+
+	/**
+	 * @return
+	 */
+	public List<MovePair> getMovePairs() {
+
+		List<MovePair> movePairs = new ArrayList<>();
+
+		int moveCount = moves.size();
+
+		MovePair movePair;
+		int pairNumber;
+		Move whiteMove;
+		Move blackMove;
+
+		int moveIndex = 0;
+
+		while (moveIndex < moveCount) {
+
+			pairNumber = (moveIndex >> 1) + 1;
+
+			whiteMove = moves.get(moveIndex++);
+
+			if (moveIndex < moveCount) {
+				blackMove = moves.get(moveIndex++);
+			} else {
+				blackMove = null;
+			}
+
+			movePair = new MovePair(pairNumber, whiteMove, blackMove);
+			movePairs.add(movePair);
+		}
+
+		return movePairs;
 	}
 
 	@Override

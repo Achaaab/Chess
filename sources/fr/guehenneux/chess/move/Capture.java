@@ -1,6 +1,5 @@
 package fr.guehenneux.chess.move;
 
-import fr.guehenneux.alphabeta.AbstractMove;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.piece.Piece;
 import fr.guehenneux.chess.player.ChessPlayer;
@@ -8,9 +7,7 @@ import fr.guehenneux.chess.player.ChessPlayer;
 /**
  * @author Jonathan Guéhenneux
  */
-public class Capture extends AbstractMove {
-
-	private Chess chess;
+public class Capture extends ChessMove {
 
 	private ChessPlayer capturedPlayer;
 
@@ -19,6 +16,9 @@ public class Capture extends AbstractMove {
 
 	private int savedX;
 	private int savedY;
+
+	private int x;
+	private int y;
 
 	/**
 	 * @param chess
@@ -29,11 +29,13 @@ public class Capture extends AbstractMove {
 
 		super(chess);
 
-		this.chess = chess;
 		this.capturingPiece = capturingPiece;
 		this.capturedPiece = capturedPiece;
 
 		capturedPlayer = capturedPiece.getPlayer();
+
+		x = capturedPiece.getX();
+		y = capturedPiece.getY();
 	}
 
 	@Override
@@ -41,9 +43,6 @@ public class Capture extends AbstractMove {
 
 		savedX = capturingPiece.getX();
 		savedY = capturingPiece.getY();
-
-		int x = capturedPiece.getX();
-		int y = capturedPiece.getY();
 
 		chess.setPiece(savedX, savedY, null);
 		chess.setPiece(x, y, capturingPiece);
@@ -57,9 +56,6 @@ public class Capture extends AbstractMove {
 	@Override
 	public void cancel() {
 
-		int x = capturedPiece.getX();
-		int y = capturedPiece.getY();
-
 		chess.setPiece(savedX, savedY, capturingPiece);
 		chess.setPiece(x, y, capturedPiece);
 		capturingPiece.decrementMoveCount();
@@ -67,5 +63,10 @@ public class Capture extends AbstractMove {
 		capturedPlayer.addPiece(capturedPiece);
 
 		super.cancel();
+	}
+
+	@Override
+	public String toString() {
+		return capturingPiece + getSquareString(savedX, savedY) + 'x' + getSquareString(x, y);
 	}
 }

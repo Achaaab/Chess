@@ -1,6 +1,5 @@
 package fr.guehenneux.chess.move;
 
-import fr.guehenneux.alphabeta.AbstractMove;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.piece.Pawn;
@@ -10,9 +9,8 @@ import fr.guehenneux.chess.player.ChessPlayer;
 /**
  * @author Jonathan Guéhenneux
  */
-public class Promotion extends AbstractMove {
+public class Promotion extends ChessMove {
 
-	private Chess chess;
 	private ChessPlayer player;
 	private Color color;
 	private Pawn pawn;
@@ -28,7 +26,6 @@ public class Promotion extends AbstractMove {
 
 		super(chess);
 
-		this.chess = chess;
 		this.pawn = pawn;
 		this.replacementPiece = replacementPiece;
 
@@ -57,7 +54,7 @@ public class Promotion extends AbstractMove {
 		player.addPiece(replacementPiece);
 		pawn.incrementMoveCount();
 
-		chess.nextPlayer();
+		super.play();
 	}
 
 	@Override
@@ -80,6 +77,6 @@ public class Promotion extends AbstractMove {
 		player.addPiece(pawn);
 		pawn.decrementMoveCount();
 
-		chess.previousPlayer();
+		super.cancel();
 	}
 }

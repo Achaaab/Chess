@@ -1,6 +1,5 @@
 package fr.guehenneux.chess.move;
 
-import fr.guehenneux.alphabeta.AbstractMove;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.piece.King;
 import fr.guehenneux.chess.piece.Rook;
@@ -8,9 +7,8 @@ import fr.guehenneux.chess.piece.Rook;
 /**
  * @author Jonathan Guéhenneux
  */
-public class Castling extends AbstractMove {
+public class Castling extends ChessMove {
 
-	private Chess chess;
 	private King king;
 	private Rook rook;
 
@@ -31,7 +29,6 @@ public class Castling extends AbstractMove {
 
 		super(chess);
 
-		this.chess = chess;
 		this.king = king;
 		this.rook = rook;
 
