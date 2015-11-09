@@ -45,86 +45,66 @@ public class Bishop extends AbstractPiece {
 		boolean emptySquare;
 		Piece piece;
 
-		newX = x + 1;
-		newY = y + 1;
+		newX = x;
+		newY = y;
 		emptySquare = true;
 
-		while (newX < 8 && newY < 8 && emptySquare) {
+		while (++newX < 8 && ++newY < 8 && emptySquare) {
 
 			piece = chess.getPiece(newX, newY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-
 				moves.add(new Advance(chess, this, newX, newY));
-				newX++;
-				newY++;
-
 			} else if (piece.getColor() != color) {
-
 				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
-		newX = x - 1;
-		newY = y - 1;
+		newX = x;
+		newY = y;
 		emptySquare = true;
 
-		while (newX > -1 && newY > -1 && emptySquare) {
+		while (--newX > -1 && --newY > -1 && emptySquare) {
 
 			piece = chess.getPiece(newX, newY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-
 				moves.add(new Advance(chess, this, newX, newY));
-				newX--;
-				newY--;
-
 			} else if (piece.getColor() != color) {
-
 				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
-		newX = x + 1;
-		newY = y - 1;
+		newX = x;
+		newY = y;
 		emptySquare = true;
 
-		while (newX < 8 && newY > -1 && emptySquare) {
+		while (++newX < 8 && --newY > -1 && emptySquare) {
 
 			piece = chess.getPiece(newX, newY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-
 				moves.add(new Advance(chess, this, newX, newY));
-				newX++;
-				newY--;
-
 			} else if (piece.getColor() != color) {
-
 				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
-		newX = x - 1;
-		newY = y + 1;
+		newX = x;
+		newY = y;
 		emptySquare = true;
 
-		while (newX > -1 && newY < 8 && emptySquare) {
+		while (--newX > -1 && ++newY < 8 && emptySquare) {
 
 			piece = chess.getPiece(newX, newY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-
 				moves.add(new Advance(chess, this, newX, newY));
-				newX--;
-				newY++;
-
 			} else if (piece.getColor() != color) {
-
 				moves.add(new Capture(chess, this, piece));
 			}
 		}

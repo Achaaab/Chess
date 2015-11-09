@@ -20,18 +20,22 @@ public class BoardUI extends GridPane {
 
 	private static final double SQUARE_SIZE_INCHES = 1.0;
 	private static final String SQUARE_FONT_NAME = "Arial Unicode MS";
-	private static final double SQUARE_FONT_SIZE_RATIO = 0.75;
+	private static final double SQUARE_FONT_SIZE_RATIO = 0.65;
 	private static final String LABEL_FONT_NAME = "Arial Unicode MS";
 	private static final double LABEL_FONT_SIZE_RATIO = 0.4;
 
 	private static final Paint DARK_SQUARE_COLOR = Color.web("0xD18B47");
 	private static final Paint WHITE_SQUARE_COLOR = Color.web("0xFFCE9E");
+	private static final Paint BACKGROUND_COLOR = Color.web("0xFFF0E0");
 
 	private static final Background DARK_SQUARE_BACKGROUND = new Background(new BackgroundFill(DARK_SQUARE_COLOR,
 			CornerRadii.EMPTY, Insets.EMPTY));
 
 	private static final Background WHITE_SQUARE_BACKGROUND = new Background(new BackgroundFill(WHITE_SQUARE_COLOR,
 			CornerRadii.EMPTY, Insets.EMPTY));
+
+	private static final Background BACKGROUND = new Background(new BackgroundFill(BACKGROUND_COLOR, CornerRadii.EMPTY,
+			Insets.EMPTY));
 
 	private Chess model;
 
@@ -62,6 +66,7 @@ public class BoardUI extends GridPane {
 			fileLabel.setFont(labelFont);
 			fileLabel.setAlignment(Pos.BOTTOM_CENTER);
 			fileLabel.setPrefSize(squareSize, squareSize);
+			fileLabel.setBackground(BACKGROUND);
 
 			add(fileLabel, file + 1, 0);
 
@@ -69,6 +74,7 @@ public class BoardUI extends GridPane {
 			fileLabel.setFont(labelFont);
 			fileLabel.setAlignment(Pos.TOP_CENTER);
 			fileLabel.setPrefSize(squareSize, squareSize);
+			fileLabel.setBackground(BACKGROUND);
 
 			add(fileLabel, file + 1, 9);
 		}
@@ -81,6 +87,7 @@ public class BoardUI extends GridPane {
 			rankLabel.setFont(labelFont);
 			rankLabel.setAlignment(Pos.CENTER);
 			rankLabel.setPrefSize(squareSize, squareSize);
+			rankLabel.setBackground(BACKGROUND);
 
 			add(rankLabel, 0, 8 - rank);
 
@@ -88,6 +95,7 @@ public class BoardUI extends GridPane {
 			rankLabel.setFont(labelFont);
 			rankLabel.setAlignment(Pos.CENTER);
 			rankLabel.setPrefSize(squareSize, squareSize);
+			rankLabel.setBackground(BACKGROUND);
 
 			add(rankLabel, 9, 8 - rank);
 		}
@@ -112,6 +120,8 @@ public class BoardUI extends GridPane {
 				add(square, x + 1, 8 - y);
 			}
 		}
+
+		setBackground(BACKGROUND);
 	}
 
 	/**
