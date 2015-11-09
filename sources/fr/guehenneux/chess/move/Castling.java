@@ -23,15 +23,18 @@ public class Castling extends AbstractMove {
 	private int y;
 
 	/**
+	 * @param chess
 	 * @param king
 	 * @param rook
 	 */
-	public Castling(King king, Rook rook) {
+	public Castling(Chess chess, King king, Rook rook) {
 
+		super(chess);
+
+		this.chess = chess;
 		this.king = king;
 		this.rook = rook;
 
-		chess = king.getChess();
 		y = king.getY();
 	}
 
@@ -64,7 +67,7 @@ public class Castling extends AbstractMove {
 		king.incrementMoveCount();
 		rook.incrementMoveCount();
 
-		chess.nextPlayer();
+		super.play();
 	}
 
 	@Override
@@ -79,6 +82,6 @@ public class Castling extends AbstractMove {
 		king.decrementMoveCount();
 		rook.decrementMoveCount();
 
-		chess.previousPlayer();
+		super.cancel();
 	}
 }

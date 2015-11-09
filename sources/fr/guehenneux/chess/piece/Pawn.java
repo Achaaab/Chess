@@ -51,13 +51,13 @@ public class Pawn extends AbstractPiece {
 		case WHITE:
 
 			if (y == 1 && chess.getPiece(x, 2) == null && chess.getPiece(x, 3) == null) {
-				moves.add(new Advance(this, x, 3));
+				moves.add(new Advance(chess, this, x, 3));
 			}
 
 			if (y < 6) {
 
 				if (chess.getPiece(x, y + 1) == null) {
-					moves.add(new Advance(this, x, y + 1));
+					moves.add(new Advance(chess, this, x, y + 1));
 				}
 
 				if (x > 0) {
@@ -65,7 +65,7 @@ public class Pawn extends AbstractPiece {
 					piece = chess.getPiece(x - 1, y + 1);
 
 					if (piece != null && piece.getColor() != color) {
-						moves.add(new Capture(this, piece));
+						moves.add(new Capture(chess, this, piece));
 					}
 				}
 
@@ -74,7 +74,7 @@ public class Pawn extends AbstractPiece {
 					piece = chess.getPiece(x + 1, y + 1);
 
 					if (piece != null && piece.getColor() != color) {
-						moves.add(new Capture(this, piece));
+						moves.add(new Capture(chess, this, piece));
 					}
 				}
 
@@ -84,10 +84,10 @@ public class Pawn extends AbstractPiece {
 
 				if (piece == null) {
 
-					moves.add(new Promotion(this, promotionQueen));
-					moves.add(new Promotion(this, promotionRook));
-					moves.add(new Promotion(this, promotionBishop));
-					moves.add(new Promotion(this, promotionKnight));
+					moves.add(new Promotion(chess, this, promotionQueen));
+					moves.add(new Promotion(chess, this, promotionRook));
+					moves.add(new Promotion(chess, this, promotionBishop));
+					moves.add(new Promotion(chess, this, promotionKnight));
 				}
 
 				if (x > 0) {
@@ -96,10 +96,10 @@ public class Pawn extends AbstractPiece {
 
 					if (piece != null && piece.getColor() != color) {
 
-						moves.add(new CapturePromotion(this, piece, promotionQueen));
-						moves.add(new CapturePromotion(this, piece, promotionRook));
-						moves.add(new CapturePromotion(this, piece, promotionBishop));
-						moves.add(new CapturePromotion(this, piece, promotionKnight));
+						moves.add(new CapturePromotion(chess, this, piece, promotionQueen));
+						moves.add(new CapturePromotion(chess, this, piece, promotionRook));
+						moves.add(new CapturePromotion(chess, this, piece, promotionBishop));
+						moves.add(new CapturePromotion(chess, this, piece, promotionKnight));
 					}
 				}
 
@@ -109,10 +109,10 @@ public class Pawn extends AbstractPiece {
 
 					if (piece != null && piece.getColor() != color) {
 
-						moves.add(new CapturePromotion(this, piece, promotionQueen));
-						moves.add(new CapturePromotion(this, piece, promotionRook));
-						moves.add(new CapturePromotion(this, piece, promotionBishop));
-						moves.add(new CapturePromotion(this, piece, promotionKnight));
+						moves.add(new CapturePromotion(chess, this, piece, promotionQueen));
+						moves.add(new CapturePromotion(chess, this, piece, promotionRook));
+						moves.add(new CapturePromotion(chess, this, piece, promotionBishop));
+						moves.add(new CapturePromotion(chess, this, piece, promotionKnight));
 					}
 				}
 			}
@@ -122,13 +122,13 @@ public class Pawn extends AbstractPiece {
 		case BLACK:
 
 			if (y == 6 && chess.getPiece(x, 5) == null && chess.getPiece(x, 4) == null) {
-				moves.add(new Advance(this, x, 4));
+				moves.add(new Advance(chess, this, x, 4));
 			}
 
 			if (y > 1) {
 
 				if (chess.getPiece(x, y - 1) == null) {
-					moves.add(new Advance(this, x, y - 1));
+					moves.add(new Advance(chess, this, x, y - 1));
 				}
 
 				if (x > 0) {
@@ -136,7 +136,7 @@ public class Pawn extends AbstractPiece {
 					piece = chess.getPiece(x - 1, y - 1);
 
 					if (piece != null && piece.getColor() != color) {
-						moves.add(new Capture(this, piece));
+						moves.add(new Capture(chess, this, piece));
 					}
 				}
 
@@ -145,7 +145,7 @@ public class Pawn extends AbstractPiece {
 					piece = chess.getPiece(x + 1, y - 1);
 
 					if (piece != null && piece.getColor() != color) {
-						moves.add(new Capture(this, piece));
+						moves.add(new Capture(chess, this, piece));
 					}
 				}
 			} else {
@@ -154,10 +154,10 @@ public class Pawn extends AbstractPiece {
 
 				if (piece == null) {
 
-					moves.add(new Promotion(this, promotionQueen));
-					moves.add(new Promotion(this, promotionRook));
-					moves.add(new Promotion(this, promotionBishop));
-					moves.add(new Promotion(this, promotionKnight));
+					moves.add(new Promotion(chess, this, promotionQueen));
+					moves.add(new Promotion(chess, this, promotionRook));
+					moves.add(new Promotion(chess, this, promotionBishop));
+					moves.add(new Promotion(chess, this, promotionKnight));
 				}
 
 				if (x > 0) {
@@ -166,10 +166,10 @@ public class Pawn extends AbstractPiece {
 
 					if (piece != null && piece.getColor() != color) {
 
-						moves.add(new CapturePromotion(this, piece, promotionQueen));
-						moves.add(new CapturePromotion(this, piece, promotionRook));
-						moves.add(new CapturePromotion(this, piece, promotionBishop));
-						moves.add(new CapturePromotion(this, piece, promotionKnight));
+						moves.add(new CapturePromotion(chess, this, piece, promotionQueen));
+						moves.add(new CapturePromotion(chess, this, piece, promotionRook));
+						moves.add(new CapturePromotion(chess, this, piece, promotionBishop));
+						moves.add(new CapturePromotion(chess, this, piece, promotionKnight));
 					}
 				}
 
@@ -179,10 +179,10 @@ public class Pawn extends AbstractPiece {
 
 					if (piece != null && piece.getColor() != color) {
 
-						moves.add(new CapturePromotion(this, piece, promotionQueen));
-						moves.add(new CapturePromotion(this, piece, promotionRook));
-						moves.add(new CapturePromotion(this, piece, promotionBishop));
-						moves.add(new CapturePromotion(this, piece, promotionKnight));
+						moves.add(new CapturePromotion(chess, this, piece, promotionQueen));
+						moves.add(new CapturePromotion(chess, this, piece, promotionRook));
+						moves.add(new CapturePromotion(chess, this, piece, promotionBishop));
+						moves.add(new CapturePromotion(chess, this, piece, promotionKnight));
 					}
 				}
 			}

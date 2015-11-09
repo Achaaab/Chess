@@ -41,9 +41,9 @@ public class King extends AbstractPiece {
 				piece = chess.getPiece(x - 1, y - 1);
 
 				if (piece == null) {
-					moves.add(new Advance(this, x - 1, y - 1));
+					moves.add(new Advance(chess, this, x - 1, y - 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(this, piece));
+					moves.add(new Capture(chess, this, piece));
 				}
 
 			}
@@ -53,18 +53,18 @@ public class King extends AbstractPiece {
 				piece = chess.getPiece(x - 1, y + 1);
 
 				if (piece == null) {
-					moves.add(new Advance(this, x - 1, y + 1));
+					moves.add(new Advance(chess, this, x - 1, y + 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(this, piece));
+					moves.add(new Capture(chess, this, piece));
 				}
 			}
 
 			piece = chess.getPiece(x - 1, y);
 
 			if (piece == null) {
-				moves.add(new Advance(this, x - 1, y));
+				moves.add(new Advance(chess, this, x - 1, y));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -75,9 +75,9 @@ public class King extends AbstractPiece {
 				piece = chess.getPiece(x + 1, y - 1);
 
 				if (piece == null) {
-					moves.add(new Advance(this, x + 1, y - 1));
+					moves.add(new Advance(chess, this, x + 1, y - 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(this, piece));
+					moves.add(new Capture(chess, this, piece));
 				}
 
 			}
@@ -87,18 +87,18 @@ public class King extends AbstractPiece {
 				piece = chess.getPiece(x + 1, y + 1);
 
 				if (piece == null) {
-					moves.add(new Advance(this, x + 1, y + 1));
+					moves.add(new Advance(chess, this, x + 1, y + 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(this, piece));
+					moves.add(new Capture(chess, this, piece));
 				}
 			}
 
 			piece = chess.getPiece(x + 1, y);
 
 			if (piece == null) {
-				moves.add(new Advance(this, x + 1, y));
+				moves.add(new Advance(chess, this, x + 1, y));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -107,9 +107,9 @@ public class King extends AbstractPiece {
 			piece = chess.getPiece(x, y - 1);
 
 			if (piece == null) {
-				moves.add(new Advance(this, x, y - 1));
+				moves.add(new Advance(chess, this, x, y - 1));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 
 		}
@@ -119,9 +119,9 @@ public class King extends AbstractPiece {
 			piece = chess.getPiece(x, y + 1);
 
 			if (piece == null) {
-				moves.add(new Advance(this, x, y + 1));
+				moves.add(new Advance(chess, this, x, y + 1));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -138,7 +138,7 @@ public class King extends AbstractPiece {
 				if (piece != null && piece.getMoveCount() == 0 && piece.getColor() == color && piece instanceof Rook) {
 
 					rook = (Rook) piece;
-					moves.add(new Castling(this, rook));
+					moves.add(new Castling(chess, this, rook));
 				}
 			}
 
@@ -149,7 +149,7 @@ public class King extends AbstractPiece {
 				if (piece != null && piece.getMoveCount() == 0 && piece.getColor() == color && piece instanceof Rook) {
 
 					rook = (Rook) piece;
-					moves.add(new Castling(this, rook));
+					moves.add(new Castling(chess, this, rook));
 				}
 			}
 		}

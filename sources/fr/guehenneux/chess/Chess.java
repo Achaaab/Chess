@@ -2,7 +2,13 @@ package fr.guehenneux.chess;
 
 import fr.guehenneux.alphabeta.Player;
 import fr.guehenneux.alphabeta.TwoPlayersZeroSumGame;
+import fr.guehenneux.chess.piece.Bishop;
+import fr.guehenneux.chess.piece.King;
+import fr.guehenneux.chess.piece.Knigth;
+import fr.guehenneux.chess.piece.Pawn;
 import fr.guehenneux.chess.piece.Piece;
+import fr.guehenneux.chess.piece.Queen;
+import fr.guehenneux.chess.piece.Rook;
 import fr.guehenneux.chess.player.ChessPlayer;
 import fr.guehenneux.chess.player.ChessPlayerAI;
 
@@ -78,6 +84,362 @@ public class Chess extends TwoPlayersZeroSumGame {
 	@Override
 	public double getWinningMoveValue() {
 		return 2000;
+	}
+
+	/**
+	 * @param x
+	 * @param y
+	 * @param color
+	 * @return whether the specified square is attacked by a piece of different color
+	 */
+	public boolean isSquareAttacked(int kingX, int kingY, Color color) {
+
+		Piece piece;
+
+		// check pawn attacks
+
+		switch (color) {
+
+		case WHITE:
+
+			if (kingY < 6) {
+
+				if (kingX < 7) {
+
+					piece = getPiece(kingX + 1, kingY + 1);
+
+					if (piece != null && piece.getColor() != color && piece instanceof Pawn) {
+						return true;
+					}
+				}
+
+				if (kingX > 0) {
+
+					piece = getPiece(kingX - 1, kingY + 1);
+
+					if (piece != null && piece.getColor() != color && piece instanceof Pawn) {
+						return true;
+					}
+				}
+			}
+
+			break;
+
+		case BLACK:
+
+			if (kingY > 1) {
+
+				if (kingX < 7) {
+
+					piece = getPiece(kingX + 1, kingY - 1);
+
+					if (piece != null && piece.getColor() != color && piece instanceof Pawn) {
+						return true;
+					}
+				}
+
+				if (kingX > 0) {
+
+					piece = getPiece(kingX - 1, kingY - 1);
+
+					if (piece != null && piece.getColor() != color && piece instanceof Pawn) {
+						return true;
+					}
+				}
+			}
+
+			break;
+		}
+
+		// check knight attacks
+
+		if (kingX > 1) {
+
+			if (kingY > 0) {
+
+				piece = getPiece(kingX - 2, kingY - 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+
+			if (kingY < 7) {
+
+				piece = getPiece(kingX - 2, kingY + 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+		}
+
+		if (kingX < 6) {
+
+			if (kingY > 0) {
+
+				piece = getPiece(kingX + 2, kingY - 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+
+			if (kingY < 7) {
+
+				piece = getPiece(kingX + 2, kingY + 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+		}
+
+		if (kingY > 1) {
+
+			if (kingX > 0) {
+
+				piece = getPiece(kingX - 1, kingY - 2);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+
+			if (kingX < 7) {
+
+				piece = getPiece(kingX + 1, kingY - 2);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+		}
+
+		if (kingY < 6) {
+
+			if (kingX > 0) {
+
+				piece = getPiece(kingX - 1, kingY + 2);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+
+			if (kingX < 7) {
+
+				piece = getPiece(kingX + 1, kingY + 2);
+
+				if (piece != null && piece.getColor() != color && piece instanceof Knigth) {
+					return true;
+				}
+			}
+		}
+
+		// check king attacks
+
+		if (kingX > 0) {
+
+			if (kingY > 0) {
+
+				piece = getPiece(kingX - 1, kingY - 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof King) {
+					return true;
+				}
+			}
+
+			if (kingY < 7) {
+
+				piece = getPiece(kingX - 1, kingY + 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof King) {
+					return true;
+				}
+			}
+
+			piece = getPiece(kingX - 1, kingY);
+
+			if (piece != null && piece.getColor() != color && piece instanceof King) {
+				return true;
+			}
+		}
+
+		if (kingX < 7) {
+
+			if (kingY > 0) {
+
+				piece = getPiece(kingX + 1, kingY - 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof King) {
+					return true;
+				}
+			}
+
+			if (kingY < 7) {
+
+				piece = getPiece(kingX + 1, kingY + 1);
+
+				if (piece != null && piece.getColor() != color && piece instanceof King) {
+					return true;
+				}
+			}
+
+			piece = getPiece(kingX + 1, kingY);
+
+			if (piece != null && piece.getColor() != color && piece instanceof King) {
+				return true;
+			}
+		}
+
+		if (kingY > 0) {
+
+			piece = getPiece(kingX, kingY - 1);
+
+			if (piece != null && piece.getColor() != color && piece instanceof King) {
+				return true;
+			}
+		}
+
+		if (kingY < 7) {
+
+			piece = getPiece(kingX, kingY + 1);
+
+			if (piece != null && piece.getColor() != color && piece instanceof King) {
+				return true;
+			}
+		}
+
+		int checkX;
+		int checkY;
+		boolean emptySquare;
+
+		// check bishop / queen attacks
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (++checkX < 8 && ++checkY < 8 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Bishop || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (++checkX < 8 && --checkY > -1 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Bishop || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (--checkX > -1 && --checkY > -1 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Bishop || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (--checkX > -1 && ++checkY < 8 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Bishop || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		// check rook / queen attacks
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (++checkX < 8 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Rook || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (--checkY > -1 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Rook || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (--checkX > -1 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Rook || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		checkX = kingX;
+		checkY = kingY;
+		emptySquare = true;
+
+		while (++checkY < 8 && emptySquare) {
+
+			piece = getPiece(checkX, checkY);
+
+			emptySquare = piece == null;
+
+			if (!emptySquare && piece.getColor() != color && (piece instanceof Rook || piece instanceof Queen)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	@Override

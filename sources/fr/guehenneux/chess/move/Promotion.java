@@ -20,15 +20,18 @@ public class Promotion extends AbstractMove {
 	private Piece replacementPiece;
 
 	/**
+	 * @param chess
 	 * @param pawn
 	 * @param replacementPiece
 	 */
-	public Promotion(Pawn pawn, Piece replacementPiece) {
+	public Promotion(Chess chess, Pawn pawn, Piece replacementPiece) {
 
+		super(chess);
+
+		this.chess = chess;
 		this.pawn = pawn;
 		this.replacementPiece = replacementPiece;
 
-		chess = pawn.getChess();
 		player = pawn.getPlayer();
 		color = player.getColor();
 		x = pawn.getX();

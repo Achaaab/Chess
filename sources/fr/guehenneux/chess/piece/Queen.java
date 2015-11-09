@@ -56,12 +56,12 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newX++;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -76,12 +76,12 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newX--;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -96,12 +96,12 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newY++;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -116,12 +116,12 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newY--;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -136,13 +136,13 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newX++;
 				newY++;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -157,13 +157,13 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newX--;
 				newY--;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -178,13 +178,13 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newX++;
 				newY--;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 
@@ -199,13 +199,13 @@ public class Queen extends AbstractPiece {
 
 			if (emptySquare) {
 
-				moves.add(new Advance(this, newX, newY));
+				moves.add(new Advance(chess, this, newX, newY));
 				newX--;
 				newY++;
 
 			} else if (piece.getColor() != color) {
 
-				moves.add(new Capture(this, piece));
+				moves.add(new Capture(chess, this, piece));
 			}
 		}
 

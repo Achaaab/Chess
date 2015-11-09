@@ -12,7 +12,6 @@ public class Capture extends AbstractMove {
 
 	private Chess chess;
 
-	private ChessPlayer capturingPlayer;
 	private ChessPlayer capturedPlayer;
 
 	private Piece capturingPiece;
@@ -22,17 +21,18 @@ public class Capture extends AbstractMove {
 	private int savedY;
 
 	/**
+	 * @param chess
 	 * @param capturingPiece
 	 * @param capturedPiece
 	 */
-	public Capture(Piece capturingPiece, Piece capturedPiece) {
+	public Capture(Chess chess, Piece capturingPiece, Piece capturedPiece) {
 
+		super(chess);
+
+		this.chess = chess;
 		this.capturingPiece = capturingPiece;
 		this.capturedPiece = capturedPiece;
 
-		chess = capturingPiece.getChess();
-
-		capturingPlayer = capturingPiece.getPlayer();
 		capturedPlayer = capturedPiece.getPlayer();
 	}
 
@@ -51,7 +51,7 @@ public class Capture extends AbstractMove {
 
 		capturedPlayer.removePiece(capturedPiece);
 
-		chess.nextPlayer();
+		super.play();
 	}
 
 	@Override
@@ -66,6 +66,6 @@ public class Capture extends AbstractMove {
 
 		capturedPlayer.addPiece(capturedPiece);
 
-		chess.previousPlayer();
+		super.cancel();
 	}
 }

@@ -23,17 +23,20 @@ public class CapturePromotion extends AbstractMove {
 	private int captureX;
 
 	/**
+	 * @param chess
 	 * @param pawn
 	 * @param capturePiece
 	 * @param replacementPiece
 	 */
-	public CapturePromotion(Pawn pawn, Piece capturedPiece, Piece replacementPiece) {
+	public CapturePromotion(Chess chess, Pawn pawn, Piece capturedPiece, Piece replacementPiece) {
 
+		super(chess);
+
+		this.chess = chess;
 		this.pawn = pawn;
 		this.replacementPiece = replacementPiece;
 		this.capturedPiece = capturedPiece;
 
-		chess = pawn.getChess();
 		capturingPlayer = pawn.getPlayer();
 		color = capturingPlayer.getColor();
 		x = pawn.getX();
@@ -63,7 +66,7 @@ public class CapturePromotion extends AbstractMove {
 		capturedPlayer.removePiece(capturedPiece);
 		pawn.incrementMoveCount();
 
-		chess.nextPlayer();
+		super.play();
 	}
 
 	@Override
@@ -87,6 +90,6 @@ public class CapturePromotion extends AbstractMove {
 		capturedPlayer.addPiece(capturedPiece);
 		pawn.decrementMoveCount();
 
-		chess.previousPlayer();
+		super.cancel();
 	}
 }

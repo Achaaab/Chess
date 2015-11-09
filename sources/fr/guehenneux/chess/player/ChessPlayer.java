@@ -1,9 +1,8 @@
 package fr.guehenneux.chess.player;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import fr.guehenneux.alphabeta.Move;
 import fr.guehenneux.alphabeta.Player;
@@ -119,266 +118,31 @@ public abstract class ChessPlayer implements Player {
 		value -= piece.getValue();
 	}
 
-	/**
-	 * @return
-	 */
-	public Set<Piece> getDefendingPieces() {
-
-		Set<Piece> defendingPieces = new HashSet<>();
-
-		int x = king.getX();
-		int y = king.getY();
-
-		int checkX;
-		int checkY;
-		boolean threatened;
-		Piece piece;
-		Piece allyPiece = null;
-		int allyPieceCount;
-
-		// check threats from the east
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (++checkX < 8 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Rook || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		// check threats from the south-east
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (++checkX < 8 && --checkY > -1 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Bishop || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		// check threats from the south
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (--checkY > -1 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Rook || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		// check threats from the south-west
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (--checkX > -1 && --checkY > -1 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Bishop || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		// check threats from the west
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (--checkX > -1 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Rook || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		// check threats from the north-west
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (--checkX > -1 && ++checkY < 8 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Bishop || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		// check threats from the north
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (++checkY < 8 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Rook || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		// check threats from the north-east
-
-		checkX = x;
-		checkY = y;
-		threatened = false;
-		allyPieceCount = 0;
-
-		while (++checkX < 8 && ++checkY < 8 && !threatened && allyPieceCount < 2) {
-
-			piece = chess.getPiece(checkX, checkY);
-
-			if (piece != null) {
-
-				if (piece.getColor() == color) {
-
-					allyPieceCount++;
-					allyPiece = piece;
-
-				} else if (piece instanceof Bishop || piece instanceof Queen) {
-
-					threatened = true;
-				}
-			}
-		}
-
-		if (threatened && allyPieceCount == 1) {
-			defendingPieces.add(allyPiece);
-		}
-
-		return defendingPieces;
-	}
-
 	@Override
 	public List<Move> getMoves() {
-
-		Set<Piece> defendingPieces = getDefendingPieces();
 
 		List<Move> moves = new ArrayList<>();
 
 		for (Piece piece : pieces) {
+			moves.addAll(piece.getMoves());
+		}
 
-			if (!defendingPieces.contains(piece)) {
-				moves.addAll(piece.getMoves());
+		// remove illegal moves
+
+		Iterator<Move> moveIterator = moves.iterator();
+		Move move;
+
+		while (moveIterator.hasNext()) {
+
+			move = moveIterator.next();
+
+			move.play();
+
+			if (chess.isSquareAttacked(king.getX(), king.getY(), color)) {
+				moveIterator.remove();
 			}
+
+			move.cancel();
 		}
 
 		return moves;

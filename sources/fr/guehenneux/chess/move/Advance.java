@@ -19,17 +19,19 @@ public class Advance extends AbstractMove {
 	private int y;
 
 	/**
+	 * @param chess
 	 * @param piece
 	 * @param x
 	 * @param y
 	 */
-	public Advance(Piece piece, int x, int y) {
+	public Advance(Chess chess, Piece piece, int x, int y) {
 
+		super(chess);
+
+		this.chess = chess;
 		this.piece = piece;
 		this.x = x;
 		this.y = y;
-
-		chess = piece.getChess();
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class Advance extends AbstractMove {
 		chess.setPiece(x, y, piece);
 		piece.incrementMoveCount();
 
-		chess.nextPlayer();
+		super.play();
 	}
 
 	@Override
@@ -52,6 +54,6 @@ public class Advance extends AbstractMove {
 		chess.setPiece(savedX, savedY, piece);
 		piece.decrementMoveCount();
 
-		chess.previousPlayer();
+		super.cancel();
 	}
 }
