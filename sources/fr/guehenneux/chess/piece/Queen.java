@@ -40,136 +40,136 @@ public class Queen extends AbstractPiece {
 
 		List<Move> moves = new ArrayList<>();
 
-		int newX;
-		int newY;
+		int destinationX;
+		int destinationY;
 		boolean emptySquare;
 		Piece piece;
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (++newX < 8 && emptySquare) {
+		while (++destinationX < 8 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (--newX > -1 && emptySquare) {
+		while (--destinationX > -1 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (++newY < 8 && emptySquare) {
+		while (++destinationY < 8 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (--newY > -1 && emptySquare) {
+		while (--destinationY > -1 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (++newX < 8 && ++newY < 8 && emptySquare) {
+		while (++destinationX < 8 && ++destinationY < 8 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (--newX > -1 && --newY > -1 && emptySquare) {
+		while (--destinationX > -1 && --destinationY > -1 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (++newX < 8 && --newY > -1 && emptySquare) {
+		while (++destinationX < 8 && --destinationY > -1 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 
-		newX = x;
-		newY = y;
+		destinationX = x;
+		destinationY = y;
 		emptySquare = true;
 
-		while (--newX > -1 && ++newY < 8 && emptySquare) {
+		while (--destinationX > -1 && ++destinationY < 8 && emptySquare) {
 
-			piece = chess.getPiece(newX, newY);
+			piece = chess.getPiece(destinationX, destinationY);
 			emptySquare = piece == null;
 
 			if (emptySquare) {
-				moves.add(new Advance(chess, this, newX, newY));
+				moves.add(new Advance(chess, this, destinationX, destinationY));
 			} else if (piece.getColor() != color) {
-				moves.add(new Capture(chess, this, piece));
+				moves.add(new Capture(chess, this, destinationX, destinationY));
 			}
 		}
 

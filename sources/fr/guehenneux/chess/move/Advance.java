@@ -8,37 +8,24 @@ import fr.guehenneux.chess.piece.Piece;
  */
 public class Advance extends ChessMove {
 
-	private Piece piece;
-
-	private int savedX;
-	private int savedY;
-
-	private int x;
-	private int y;
-
 	/**
 	 * @param chess
 	 * @param piece
-	 * @param x
-	 * @param y
+	 * @param destinationX
+	 * @param destinationY
 	 */
-	public Advance(Chess chess, Piece piece, int x, int y) {
-
-		super(chess);
-
-		this.piece = piece;
-		this.x = x;
-		this.y = y;
+	public Advance(Chess chess, Piece piece, int destinationX, int destinationY) {
+		super(chess, piece, destinationX, destinationY);
 	}
 
 	@Override
 	public void play() {
 
-		savedX = piece.getX();
-		savedY = piece.getY();
+		departureX = piece.getX();
+		departureY = piece.getY();
 
-		chess.setPiece(savedX, savedY, null);
-		chess.setPiece(x, y, piece);
+		chess.setPiece(departureX, departureY, null);
+		chess.setPiece(destinationX, destinationY, piece);
 		piece.incrementMoveCount();
 
 		super.play();
@@ -47,8 +34,8 @@ public class Advance extends ChessMove {
 	@Override
 	public void cancel() {
 
-		chess.setPiece(x, y, null);
-		chess.setPiece(savedX, savedY, piece);
+		chess.setPiece(destinationX, destinationY, null);
+		chess.setPiece(departureX, departureY, piece);
 		piece.decrementMoveCount();
 
 		super.cancel();
@@ -56,6 +43,6 @@ public class Advance extends ChessMove {
 
 	@Override
 	public String toString() {
-		return piece + getSquareString(savedX, savedY) + '-' + getSquareString(x, y);
+		return piece + getDepartureSquare() + '-' + getDestinationSquare();
 	}
 }

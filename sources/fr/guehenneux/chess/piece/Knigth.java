@@ -51,7 +51,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x - 2, y - 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x - 2, y - 1));
 				}
 			}
 
@@ -62,7 +62,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x - 2, y + 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x - 2, y + 1));
 				}
 			}
 		}
@@ -76,7 +76,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x + 2, y - 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x + 2, y - 1));
 				}
 			}
 
@@ -87,7 +87,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x + 2, y + 1));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x + 2, y + 1));
 				}
 			}
 		}
@@ -101,7 +101,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x - 1, y - 2));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x - 1, y - 2));
 				}
 			}
 
@@ -112,7 +112,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x + 1, y - 2));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x + 1, y - 2));
 				}
 			}
 		}
@@ -126,7 +126,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x - 1, y + 2));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x - 1, y + 2));
 				}
 			}
 
@@ -137,7 +137,7 @@ public class Knigth extends AbstractPiece {
 				if (piece == null) {
 					moves.add(new Advance(chess, this, x + 1, y + 2));
 				} else if (piece.getColor() != color) {
-					moves.add(new Capture(chess, this, piece));
+					moves.add(new Capture(chess, this, x + 1, y + 2));
 				}
 			}
 		}

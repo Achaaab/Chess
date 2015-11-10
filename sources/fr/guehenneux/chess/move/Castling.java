@@ -9,59 +9,43 @@ import fr.guehenneux.chess.piece.Rook;
  */
 public class Castling extends ChessMove {
 
-	private King king;
 	private Rook rook;
 
-	private int savedKingX;
-	private int savedRookX;
-
-	private int kingX;
-	private int rookX;
-
-	private int y;
+	private int rookDepartureX;
+	private int rookDestinationX;
 
 	/**
 	 * @param chess
 	 * @param king
+	 * @param destinationX
+	 * @param destinationY
 	 * @param rook
 	 */
-	public Castling(Chess chess, King king, Rook rook) {
+	public Castling(Chess chess, King king, int destinationX, int destinationY, Rook rook) {
 
-		super(chess);
+		super(chess, king, destinationX, destinationY);
 
-		this.king = king;
 		this.rook = rook;
 
-		y = king.getY();
+		rookDepartureX = rook.getX();
+
+		if (departureX < rookDepartureX) {
+			rookDestinationX = destinationX - 1;
+		} else {
+			rookDestinationX = destinationX + 1;
+		}
 	}
 
 	@Override
 	public void play() {
 
-		kingX = king.getX();
-		rookX = rook.getX();
+		chess.setPiece(departureX, departureY, null);
+		chess.setPiece(rookDepartureX, departureY, null);
 
-		savedKingX = kingX;
-		savedRookX = rookX;
+		chess.setPiece(destinationX, destinationY, piece);
+		chess.setPiece(rookDestinationX, destinationY, rook);
 
-		if (kingX < rookX) {
-
-			kingX += 2;
-			rookX = kingX - 1;
-
-		} else {
-
-			kingX -= 2;
-			rookX = kingX + 1;
-		}
-
-		chess.setPiece(savedKingX, y, null);
-		chess.setPiece(savedRookX, y, null);
-
-		chess.setPiece(kingX, y, king);
-		chess.setPiece(rookX, y, rook);
-
-		king.incrementMoveCount();
+		piece.incrementMoveCount();
 		rook.incrementMoveCount();
 
 		super.play();
@@ -70,13 +54,13 @@ public class Castling extends ChessMove {
 	@Override
 	public void cancel() {
 
-		chess.setPiece(kingX, y, null);
-		chess.setPiece(rookX, y, null);
+		chess.setPiece(departureX, departureY, piece);
+		chess.setPiece(rookDepartureX, departureY, rook);
 
-		chess.setPiece(savedKingX, y, king);
-		chess.setPiece(savedRookX, y, rook);
+		chess.setPiece(destinationX, destinationY, null);
+		chess.setPiece(rookDestinationX, destinationY, null);
 
-		king.decrementMoveCount();
+		piece.decrementMoveCount();
 		rook.decrementMoveCount();
 
 		super.cancel();

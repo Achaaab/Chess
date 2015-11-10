@@ -38,6 +38,11 @@ public interface Piece {
 	double PAWN_VALUE = 1;
 
 	/**
+	 * @return whether the piece can be captured en passant
+	 */
+	boolean isEnPassant();
+
+	/**
 	 * @return
 	 */
 	Chess getChess();

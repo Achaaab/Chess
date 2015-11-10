@@ -1,7 +1,6 @@
 package fr.guehenneux.chess.move;
 
 import fr.guehenneux.chess.Chess;
-import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.piece.Pawn;
 import fr.guehenneux.chess.piece.Piece;
 import fr.guehenneux.chess.player.ChessPlayer;
@@ -11,57 +10,37 @@ import fr.guehenneux.chess.player.ChessPlayer;
  */
 public class CapturePromotion extends ChessMove {
 
-	private ChessPlayer capturingPlayer;
 	private ChessPlayer capturedPlayer;
-	private Color color;
-	private Pawn pawn;
-	private int x;
-	private Piece replacementPiece;
 	private Piece capturedPiece;
-	private int captureX;
+	private Piece replacementPiece;
 
 	/**
 	 * @param chess
 	 * @param pawn
-	 * @param capturePiece
+	 * @param destinationX
+	 * @param destinationY
 	 * @param replacementPiece
 	 */
-	public CapturePromotion(Chess chess, Pawn pawn, Piece capturedPiece, Piece replacementPiece) {
+	public CapturePromotion(Chess chess, Pawn pawn, int destinationX, int destinationY, Piece replacementPiece) {
 
-		super(chess);
+		super(chess, pawn, destinationX, destinationY);
 
-		this.pawn = pawn;
 		this.replacementPiece = replacementPiece;
-		this.capturedPiece = capturedPiece;
 
-		capturingPlayer = pawn.getPlayer();
-		color = capturingPlayer.getColor();
-		x = pawn.getX();
-		captureX = capturedPiece.getX();
+		capturedPiece = chess.getPiece(destinationX, destinationY);
 		capturedPlayer = capturedPiece.getPlayer();
 	}
 
 	@Override
 	public void play() {
 
-		switch (color) {
+		chess.setPiece(departureX, departureY, null);
+		chess.setPiece(destinationX, destinationY, replacementPiece);
+		piece.incrementMoveCount();
 
-		case WHITE:
-
-			chess.setPiece(x, 6, null);
-			chess.setPiece(captureX, 7, replacementPiece);
-			break;
-
-		case BLACK:
-			chess.setPiece(x, 1, null);
-			chess.setPiece(captureX, 0, replacementPiece);
-			break;
-		}
-
-		capturingPlayer.removePiece(pawn);
-		capturingPlayer.addPiece(replacementPiece);
 		capturedPlayer.removePiece(capturedPiece);
-		pawn.incrementMoveCount();
+		player.removePiece(piece);
+		player.addPiece(replacementPiece);
 
 		super.play();
 	}
@@ -69,24 +48,19 @@ public class CapturePromotion extends ChessMove {
 	@Override
 	public void cancel() {
 
-		switch (color) {
+		chess.setPiece(departureX, departureY, piece);
+		chess.setPiece(destinationX, destinationY, capturedPiece);
+		piece.decrementMoveCount();
 
-		case WHITE:
-			chess.setPiece(captureX, 7, capturedPiece);
-			chess.setPiece(x, 6, pawn);
-			break;
-
-		case BLACK:
-			chess.setPiece(captureX, 0, capturedPiece);
-			chess.setPiece(x, 1, pawn);
-			break;
-		}
-
-		capturingPlayer.removePiece(replacementPiece);
-		capturingPlayer.addPiece(pawn);
 		capturedPlayer.addPiece(capturedPiece);
-		pawn.decrementMoveCount();
+		player.addPiece(piece);
+		player.removePiece(replacementPiece);
 
 		super.cancel();
+	}
+
+	@Override
+	public String toString() {
+		return piece + getDepartureSquare() + 'x' + getDestinationSquare() + replacementPiece;
 	}
 }

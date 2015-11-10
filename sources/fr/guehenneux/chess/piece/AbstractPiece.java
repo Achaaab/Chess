@@ -53,6 +53,11 @@ public abstract class AbstractPiece implements Piece {
 	}
 
 	@Override
+	public boolean isEnPassant() {
+		return false;
+	}
+
+	@Override
 	public Chess getChess() {
 		return chess;
 	}
@@ -111,6 +116,6 @@ public abstract class AbstractPiece implements Piece {
 
 	@Override
 	public String toString() {
-		return "" + unicodeCharacter;
+		return Character.toString(unicodeCharacter);
 	}
 }

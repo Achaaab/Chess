@@ -75,8 +75,8 @@ public class HistoryUI extends TableView<MovePair> {
 		blackMoves = new TableColumn<>("Black moves");
 
 		pairNumbers.setPrefWidth(0.5 * dpi);
-		whiteMoves.setPrefWidth(1 * dpi);
-		blackMoves.setPrefWidth(1 * dpi);
+		whiteMoves.setPrefWidth(1.2 * dpi);
+		blackMoves.setPrefWidth(1.2 * dpi);
 
 		pairNumbers.setCellFactory(PairNumberCell::new);
 		whiteMoves.setCellFactory(MoveCell::new);

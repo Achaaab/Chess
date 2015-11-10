@@ -1,58 +1,40 @@
 package fr.guehenneux.chess.move;
 
 import fr.guehenneux.chess.Chess;
-import fr.guehenneux.chess.Color;
 import fr.guehenneux.chess.piece.Pawn;
 import fr.guehenneux.chess.piece.Piece;
-import fr.guehenneux.chess.player.ChessPlayer;
 
 /**
  * @author Jonathan Guéhenneux
  */
 public class Promotion extends ChessMove {
 
-	private ChessPlayer player;
-	private Color color;
-	private Pawn pawn;
-	private int x;
 	private Piece replacementPiece;
 
 	/**
 	 * @param chess
 	 * @param pawn
+	 * @param destinationX
+	 * @param destinationY
 	 * @param replacementPiece
 	 */
-	public Promotion(Chess chess, Pawn pawn, Piece replacementPiece) {
+	public Promotion(Chess chess, Pawn pawn, int destinationX, int destinationY, Piece replacementPiece) {
 
-		super(chess);
+		super(chess, pawn, destinationX, destinationY);
 
-		this.pawn = pawn;
 		this.replacementPiece = replacementPiece;
-
-		player = pawn.getPlayer();
-		color = player.getColor();
-		x = pawn.getX();
 	}
 
 	@Override
 	public void play() {
 
-		switch (color) {
+		chess.setPiece(departureX, departureY, null);
+		chess.setPiece(destinationX, destinationY, replacementPiece);
 
-		case WHITE:
-			chess.setPiece(x, 6, null);
-			chess.setPiece(x, 7, replacementPiece);
-			break;
-
-		case BLACK:
-			chess.setPiece(x, 1, null);
-			chess.setPiece(x, 0, replacementPiece);
-			break;
-		}
-
-		player.removePiece(pawn);
+		player.removePiece(piece);
 		player.addPiece(replacementPiece);
-		pawn.incrementMoveCount();
+
+		piece.incrementMoveCount();
 
 		super.play();
 	}
@@ -60,23 +42,19 @@ public class Promotion extends ChessMove {
 	@Override
 	public void cancel() {
 
-		switch (color) {
+		chess.setPiece(departureX, departureY, piece);
+		chess.setPiece(destinationX, destinationY, null);
 
-		case WHITE:
-			chess.setPiece(x, 7, null);
-			chess.setPiece(x, 6, pawn);
-			break;
-
-		case BLACK:
-			chess.setPiece(x, 0, null);
-			chess.setPiece(x, 1, pawn);
-			break;
-		}
-
+		player.addPiece(piece);
 		player.removePiece(replacementPiece);
-		player.addPiece(pawn);
-		pawn.decrementMoveCount();
+
+		piece.decrementMoveCount();
 
 		super.cancel();
+	}
+
+	@Override
+	public String toString() {
+		return piece + getDepartureSquare() + '-' + getDestinationSquare() + replacementPiece;
 	}
 }

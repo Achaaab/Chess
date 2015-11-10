@@ -9,44 +9,29 @@ import fr.guehenneux.chess.player.ChessPlayer;
  */
 public class Capture extends ChessMove {
 
-	private ChessPlayer capturedPlayer;
-
-	private Piece capturingPiece;
 	private Piece capturedPiece;
-
-	private int savedX;
-	private int savedY;
-
-	private int x;
-	private int y;
+	private ChessPlayer capturedPlayer;
 
 	/**
 	 * @param chess
 	 * @param capturingPiece
 	 * @param capturedPiece
 	 */
-	public Capture(Chess chess, Piece capturingPiece, Piece capturedPiece) {
+	public Capture(Chess chess, Piece capturingPiece, int destinationX, int destinationY) {
 
-		super(chess);
+		super(chess, capturingPiece, destinationX, destinationY);
 
-		this.capturingPiece = capturingPiece;
-		this.capturedPiece = capturedPiece;
-
+		capturedPiece = chess.getPiece(destinationX, destinationY);
 		capturedPlayer = capturedPiece.getPlayer();
-
-		x = capturedPiece.getX();
-		y = capturedPiece.getY();
 	}
 
 	@Override
 	public void play() {
 
-		savedX = capturingPiece.getX();
-		savedY = capturingPiece.getY();
+		chess.setPiece(departureX, departureY, null);
+		chess.setPiece(destinationX, destinationY, piece);
 
-		chess.setPiece(savedX, savedY, null);
-		chess.setPiece(x, y, capturingPiece);
-		capturingPiece.incrementMoveCount();
+		piece.incrementMoveCount();
 
 		capturedPlayer.removePiece(capturedPiece);
 
@@ -56,9 +41,10 @@ public class Capture extends ChessMove {
 	@Override
 	public void cancel() {
 
-		chess.setPiece(savedX, savedY, capturingPiece);
-		chess.setPiece(x, y, capturedPiece);
-		capturingPiece.decrementMoveCount();
+		chess.setPiece(departureX, departureY, piece);
+		chess.setPiece(destinationX, destinationY, capturedPiece);
+
+		piece.decrementMoveCount();
 
 		capturedPlayer.addPiece(capturedPiece);
 
@@ -67,6 +53,6 @@ public class Capture extends ChessMove {
 
 	@Override
 	public String toString() {
-		return capturingPiece + getSquareString(savedX, savedY) + 'x' + getSquareString(x, y);
+		return piece + getDepartureSquare() + 'x' + getDestinationSquare();
 	}
 }
