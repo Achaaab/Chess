@@ -16,7 +16,9 @@ import fr.guehenneux.chess.piece.Queen;
 import fr.guehenneux.chess.piece.Rook;
 import fr.guehenneux.chess.player.ChessPlayer;
 import fr.guehenneux.chess.player.ChessPlayerAI;
+import fr.guehenneux.chess.player.ChessPlayerUI;
 import fr.guehenneux.chess.ui.ChessUI;
+import fr.guehenneux.chess.ui.SquareSelectionHandler;
 
 /**
  * @author Jonathan Guéhenneux
@@ -37,7 +39,7 @@ public class Chess extends TwoPlayersZeroSumGame {
 
 		board = new Piece[8][8];
 
-		player0 = white = new ChessPlayerAI(this, Color.WHITE);
+		player0 = white = new ChessPlayerUI(this, Color.WHITE);
 		player1 = black = new ChessPlayerAI(this, Color.BLACK);
 
 		currentPlayer = white;
@@ -64,13 +66,6 @@ public class Chess extends TwoPlayersZeroSumGame {
 		if (piece != null) {
 			piece.setPosition(x, y);
 		}
-	}
-
-	/**
-	 * @param ui
-	 */
-	public void setUI(ChessUI ui) {
-		this.ui = ui;
 	}
 
 	/**
@@ -515,6 +510,26 @@ public class Chess extends TwoPlayersZeroSumGame {
 	@Override
 	public boolean isDraw() {
 		return currentPlayer.getMoves().isEmpty();
+	}
+
+	/**
+	 * @param ui
+	 */
+	public void setUI(ChessUI ui) {
+
+		this.ui = ui;
+
+		updateUI();
+	}
+
+	/**
+	 * @param selectionHandler
+	 */
+	public void addSelectionHandler(SquareSelectionHandler selectionHandler) {
+
+		if (ui != null) {
+			ui.addSelectionHandler(selectionHandler);
+		}
 	}
 
 	@Override

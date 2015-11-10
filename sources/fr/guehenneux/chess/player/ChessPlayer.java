@@ -21,9 +21,10 @@ import fr.guehenneux.chess.piece.Rook;
  */
 public abstract class ChessPlayer implements Player {
 
-	private Chess chess;
-	private Color color;
-	private List<Piece> pieces;
+	protected Chess chess;
+	protected Color color;
+	protected List<Piece> pieces;
+
 	private double value;
 	private King king;
 	private List<Move> moves;
@@ -128,7 +129,14 @@ public abstract class ChessPlayer implements Player {
 			moves.addAll(piece.getMoves());
 		}
 
-		// remove illegal moves
+		removeIllegalMoves(moves);
+	}
+
+	/**
+	 * @param moves
+	 * @return
+	 */
+	public void removeIllegalMoves(List<Move> moves) {
 
 		Iterator<Move> moveIterator = moves.iterator();
 		Move move;

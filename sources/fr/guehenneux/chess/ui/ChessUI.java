@@ -39,4 +39,11 @@ public class ChessUI extends GridPane {
 			historyUI.update();
 		});
 	}
+
+	/**
+	 * @param selectionHandler
+	 */
+	public void addSelectionHandler(SquareSelectionHandler selectionHandler) {
+		Platform.runLater(() -> boardUI.addSelectionHandler(selectionHandler));
+	}
 }
