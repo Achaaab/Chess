@@ -24,9 +24,9 @@ public abstract class ChessPlayer implements Player {
 	private Chess chess;
 	private Color color;
 	private List<Piece> pieces;
-	private boolean kingAlive;
 	private double value;
 	private King king;
+	private List<Move> moves;
 
 	/**
 	 * @param chess
@@ -91,13 +91,16 @@ public abstract class ChessPlayer implements Player {
 	}
 
 	/**
+	 * @return
+	 */
+	public boolean isCheckMate() {
+		return king.isCheck() && moves.isEmpty();
+	}
+
+	/**
 	 * @param piece
 	 */
 	public void addPiece(Piece piece) {
-
-		if (piece instanceof King) {
-			kingAlive = true;
-		}
 
 		pieces.add(piece);
 
@@ -109,19 +112,17 @@ public abstract class ChessPlayer implements Player {
 	 */
 	public void removePiece(Piece piece) {
 
-		if (piece instanceof King) {
-			kingAlive = false;
-		}
-
 		pieces.remove(piece);
 
 		value -= piece.getValue();
 	}
 
-	@Override
-	public List<Move> getMoves() {
+	/**
+	 * 
+	 */
+	public void computeMoves() {
 
-		List<Move> moves = new ArrayList<>();
+		moves = new ArrayList<>();
 
 		for (Piece piece : pieces) {
 			moves.addAll(piece.getMoves());
@@ -144,15 +145,11 @@ public abstract class ChessPlayer implements Player {
 
 			move.cancel();
 		}
-
-		return moves;
 	}
 
-	/**
-	 * @return
-	 */
-	public boolean isKingAlive() {
-		return kingAlive;
+	@Override
+	public List<Move> getMoves() {
+		return moves;
 	}
 
 	/**

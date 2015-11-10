@@ -1,7 +1,7 @@
 package fr.guehenneux.chess.player;
 
+import fr.guehenneux.alphabeta.AlphaBeta;
 import fr.guehenneux.alphabeta.DecisionAlgorithm;
-import fr.guehenneux.alphabeta.MiniMax;
 import fr.guehenneux.alphabeta.Move;
 import fr.guehenneux.chess.Chess;
 import fr.guehenneux.chess.Color;
@@ -21,7 +21,7 @@ public class ChessPlayerAI extends ChessPlayer {
 
 		super(chess, color);
 
-		decisionAlgorithm = new MiniMax(chess, 5, false);
+		decisionAlgorithm = new AlphaBeta(chess, 6, false);
 	}
 
 	@Override

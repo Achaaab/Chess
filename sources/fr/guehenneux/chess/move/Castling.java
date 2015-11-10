@@ -14,12 +14,15 @@ public class Castling extends ChessMove {
 	private int rookDepartureX;
 	private int rookDestinationX;
 
+	private boolean castlingShort;
+
 	/**
 	 * @param chess
 	 * @param king
 	 * @param destinationX
 	 * @param destinationY
 	 * @param rook
+	 * @param castlingShort
 	 */
 	public Castling(Chess chess, King king, int destinationX, int destinationY, Rook rook) {
 
@@ -29,10 +32,15 @@ public class Castling extends ChessMove {
 
 		rookDepartureX = rook.getX();
 
-		if (departureX < rookDepartureX) {
-			rookDestinationX = destinationX - 1;
+		if (destinationX == 2) {
+
+			rookDestinationX = 3;
+			castlingShort = false;
+
 		} else {
-			rookDestinationX = destinationX + 1;
+
+			rookDestinationX = 5;
+			castlingShort = true;
 		}
 	}
 
@@ -64,5 +72,10 @@ public class Castling extends ChessMove {
 		rook.decrementMoveCount();
 
 		super.cancel();
+	}
+
+	@Override
+	public String toString() {
+		return castlingShort ? "0-0" : "0-0-0";
 	}
 }

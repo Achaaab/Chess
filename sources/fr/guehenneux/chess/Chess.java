@@ -488,12 +488,25 @@ public class Chess extends TwoPlayersZeroSumGame {
 
 		Player winner;
 
-		if (!white.isKingAlive()) {
-			winner = black;
-		} else if (!black.isKingAlive()) {
-			winner = white;
+		if (currentPlayer == white) {
+
+			white.computeMoves();
+
+			if (white.isCheckMate()) {
+				winner = black;
+			} else {
+				winner = null;
+			}
+
 		} else {
-			winner = null;
+
+			black.computeMoves();
+
+			if (black.isCheckMate()) {
+				winner = white;
+			} else {
+				winner = null;
+			}
 		}
 
 		return winner;
@@ -501,7 +514,7 @@ public class Chess extends TwoPlayersZeroSumGame {
 
 	@Override
 	public boolean isDraw() {
-		return false;
+		return currentPlayer.getMoves().isEmpty();
 	}
 
 	@Override

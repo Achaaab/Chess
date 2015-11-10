@@ -27,6 +27,13 @@ public class King extends AbstractPiece {
 		super(chess, player, color, KING_VALUE, x, y, color == Color.WHITE ? WHITE_KING : BLACK_KING);
 	}
 
+	/**
+	 * @return whether the king is check
+	 */
+	public boolean isCheck() {
+		return chess.isSquareAttacked(x, y, color);
+	}
+
 	@Override
 	public List<Move> getMoves() {
 
