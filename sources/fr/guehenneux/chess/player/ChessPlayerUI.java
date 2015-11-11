@@ -76,8 +76,6 @@ public class ChessPlayerUI extends ChessPlayer implements SquareSelectionHandler
 		departureX = x;
 		departureY = y;
 
-		System.out.println(departureX + " - " + departureY);
-
 		do {
 
 			try {

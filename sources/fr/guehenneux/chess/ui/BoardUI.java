@@ -36,7 +36,7 @@ public class BoardUI extends GridPane {
 
 		SquareUI square;
 
-		double squareSize = SquareUI.SIZE_INCHES * dpi;
+		double squareSize = SquareUI.SQUARE_SIZE_INCHES * dpi;
 
 		Font labelFont = new Font(LABEL_FONT_NAME, squareSize * LABEL_FONT_SIZE_RATIO);
 
@@ -119,6 +119,7 @@ public class BoardUI extends GridPane {
 
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
+
 				squares[x][y].addSelectionHandler(selectionHandler);
 			}
 		}

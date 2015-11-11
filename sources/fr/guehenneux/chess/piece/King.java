@@ -134,7 +134,7 @@ public class King extends AbstractPiece {
 
 		// castlings
 
-		if (moveCount == 0) {
+		if (moveCount == 0 && !isCheck()) {
 
 			Rook rook;
 

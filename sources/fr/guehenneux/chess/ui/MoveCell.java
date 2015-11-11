@@ -34,7 +34,7 @@ public class MoveCell extends TableCell<MovePair, String> {
 		if (empty || move == null) {
 			setText("");
 		} else {
-			setText(move.toString());
+			setText(move);
 		}
 	}
 }

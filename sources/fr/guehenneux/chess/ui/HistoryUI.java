@@ -19,6 +19,7 @@ import fr.guehenneux.chess.move.MovePair;
 public class HistoryUI extends TableView<MovePair> {
 
 	private static final String FONT_NAME = "Arial Unicode MS";
+	private static final double FONT_SIZE_INCHES = 0.18;
 
 	/**
 	 * @return
@@ -35,7 +36,7 @@ public class HistoryUI extends TableView<MovePair> {
 	private static ObservableValue<String> getWhiteMove(CellDataFeatures<MovePair, String> movePair) {
 
 		Move whiteMove = movePair.getValue().getWhiteMove();
-		return new SimpleStringProperty(whiteMove.toString());
+		return new SimpleStringProperty(whiteMove.toString() + " (" + whiteMove.getValue() + ")");
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class HistoryUI extends TableView<MovePair> {
 
 		this.chess = chess;
 
-		Font font = Font.font(FONT_NAME, dpi * 0.2);
+		Font font = Font.font(FONT_NAME, FONT_SIZE_INCHES * dpi);
 		PairNumberCell.setDefaultFont(font);
 		MoveCell.setDefaultFont(font);
 

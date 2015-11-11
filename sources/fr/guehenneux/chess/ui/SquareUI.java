@@ -6,6 +6,7 @@ import java.util.List;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -23,10 +24,9 @@ import fr.guehenneux.chess.piece.Piece;
  */
 public class SquareUI extends Label implements EventHandler<MouseEvent> {
 
-	public static final double SIZE_INCHES = 1.0;
-
+	public static final double SQUARE_SIZE_INCHES = 0.9;
 	private static final String FONT_NAME = "Arial Unicode MS";
-	private static final double FONT_SIZE_RATIO = 0.65;
+	private static final double FONT_SIZE_INCHES = 0.62;
 	private static final double BORDER_RATIO = 0.05;
 
 	private static final Paint DARK_PAINT = Color.web("0xD18B47");
@@ -34,7 +34,7 @@ public class SquareUI extends Label implements EventHandler<MouseEvent> {
 	private static final Paint DEPARTURE_PAINT = Color.BLUE;
 	private static final Paint DESTINATION_PAINT = Color.GREEN;
 
-	private static final String EMPTY = "";
+	private static final String EMPTY = " ";
 
 	private Chess chess;
 	private int x;
@@ -61,18 +61,19 @@ public class SquareUI extends Label implements EventHandler<MouseEvent> {
 
 		dark = (x + y) % 2 == 0;
 
-		double squareSize = SIZE_INCHES * dpi;
+		double squareSize = SQUARE_SIZE_INCHES * dpi;
+		double fontSize = FONT_SIZE_INCHES * dpi;
+
 		setPrefSize(squareSize, squareSize);
-
 		double borderWidth = squareSize * BORDER_RATIO;
-		double fontSize = squareSize * FONT_SIZE_RATIO;
-
 		Font font = Font.font(FONT_NAME, fontSize);
 		setFont(font);
 
 		setAlignment(Pos.CENTER);
 
 		Paint paint = dark ? DARK_PAINT : WHITE_PAINT;
+
+		setCursor(dark ? Cursor.HAND : Cursor.DEFAULT);
 
 		Insets selectionInsets = new Insets(borderWidth);
 
@@ -105,6 +106,7 @@ public class SquareUI extends Label implements EventHandler<MouseEvent> {
 		}
 
 		ChessMove lastMove = (ChessMove) chess.getLastMove();
+
 		setBackground(getBackground(lastMove));
 	}
 

@@ -39,8 +39,8 @@ public class Chess extends TwoPlayersZeroSumGame {
 
 		board = new Piece[8][8];
 
-		player0 = white = new ChessPlayerUI(this, Color.WHITE);
-		player1 = black = new ChessPlayerAI(this, Color.BLACK);
+		player0 = white = new ChessPlayerAI(this, Color.WHITE);
+		player1 = black = new ChessPlayerUI(this, Color.BLACK);
 
 		currentPlayer = white;
 	}
